@@ -7,7 +7,7 @@ cask "refill" do
   desc "Codex 5-hour and weekly limit resets as Apple Reminders"
   homepage "https://github.com/fenil210-cactus/refill"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Refill.app"
   binary "#{appdir}/Refill.app/Contents/MacOS/Refill", target: "refill"
