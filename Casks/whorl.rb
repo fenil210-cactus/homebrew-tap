@@ -7,16 +7,14 @@ cask "whorl" do
   desc "Free, local drag-and-drop file converter in the menu bar"
   homepage "https://github.com/fenil210-cactus/whorl"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Whorl.app"
   binary "#{appdir}/Whorl.app/Contents/MacOS/Whorl", target: "whorl"
 
   # The app is signed ad hoc (no paid Apple account). Clearing the download flag lets it open without a warning.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Whorl.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Whorl.app"], must_succeed: false
   end
 
   uninstall quit: "com.fenil210.whorl"
