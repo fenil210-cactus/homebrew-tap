@@ -13,8 +13,8 @@ cask "refill" do
   binary "#{appdir}/Refill.app/Contents/MacOS/Refill", target: "refill"
 
   # Ad-hoc signed (no paid Apple Developer account): clear the download quarantine so it opens normally.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/Refill.app"]
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Refill.app"], must_succeed: false
   end
 
   uninstall quit: "com.fenil210.refill"
